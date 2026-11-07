@@ -46,10 +46,12 @@ export default function CapsuleOpeningScreen({
     <section className="view-section active-view">
       <div className="capsule-container">
         
-        {/* Hero Headings */}
+        {/* Pratik Zajam Festive Hero Headings */}
         <div className="capsule-headline-box">
           <div className="shimmer-pill gold-pill">
-            <span>✨ Deepavali Special Delivery ✨</span>
+            <span className="sparkle-dot"></span>
+            <span>Official Festive Delivery • {displaySender}</span>
+            <span className="sparkle-dot"></span>
           </div>
 
           <h1 className="hero-title">
@@ -61,7 +63,7 @@ export default function CapsuleOpeningScreen({
           </p>
 
           <p className="capsule-instruction">
-            A golden time capsule filled with festive light, joy, and blessings awaits you.
+            A handcrafted festive time capsule packed with light, blessings, and warm wishes.
           </p>
         </div>
 
@@ -86,7 +88,7 @@ export default function CapsuleOpeningScreen({
             />
             {recipientName && (
               <span className="name-personalized-badge">
-                ✓ Personalizing for {displayRecipient}
+                ✓ Personalizing surprise for {displayRecipient}
               </span>
             )}
           </div>
@@ -115,7 +117,7 @@ export default function CapsuleOpeningScreen({
               <div className="capsule-diya-icon">🪔</div>
             </div>
 
-            {/* The Capsule Chest Body */}
+            {/* The Capsule Chest Body with PZ Crest */}
             <div className="capsule-chest">
               <div className="chest-lid">
                 <div className="lid-ribbon"></div>
@@ -123,7 +125,7 @@ export default function CapsuleOpeningScreen({
               </div>
               <div className="chest-base">
                 <div className="chest-front-pattern">
-                  <div className="royal-emblem">☸</div>
+                  <div className="royal-emblem">⚜ PZ ⚜</div>
                   <div className="chest-label">DIWALI SURPRISE CAPSULE</div>
                   <div className="chest-for">
                     For: <span>{displayRecipient}</span>

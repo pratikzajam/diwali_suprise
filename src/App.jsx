@@ -10,21 +10,21 @@ import {
   DEFAULT_RECIPIENT,
   TEMPLATES
 } from './data/templates';
-import { playFestiveChimeChord, playDiyaBell } from './utils/audio';
+import { playFestiveChimeChord } from './utils/audio';
 import { downloadGreetingCardPNG } from './utils/cardImage';
 
 export default function App() {
   const [senderName] = useState(DEFAULT_SENDER);
   const [recipientName, setRecipientName] = useState(DEFAULT_RECIPIENT);
   
-  // Only the festive experience views: 'capsule' | 'revealed'
+  // Festive experience views: 'capsule' | 'revealed'
   const [currentView, setCurrentView] = useState('capsule');
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [sparklerActive, setSparklerActive] = useState(false);
   const [litDiyas, setLitDiyas] = useState([]);
   const [lanterns, setLanterns] = useState([]);
 
-  // Parse URL search parameters on mount (in case URL specifies recipient name)
+  // Parse URL search parameters on mount
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const toParam = params.get('to') || params.get('recipient') || params.get('name');
@@ -33,7 +33,6 @@ export default function App() {
       setRecipientName(toParam.trim());
     }
 
-    // Launch initial gentle lantern
     launchLantern();
   }, []);
 
@@ -92,7 +91,7 @@ export default function App() {
         <div className="hanging-lantern right-lantern">🏮</div>
       </div>
 
-      {/* Header Navigation */}
+      {/* Header Navigation with Pratik Zajam Branding */}
       <Header
         senderName={senderName}
         soundEnabled={soundEnabled}
@@ -109,7 +108,7 @@ export default function App() {
       {/* Main Content Area */}
       <main className="main-content">
         
-        {/* VIEW 1: CAPSULE OPENING SCREEN (USER EXPERIENCE) */}
+        {/* VIEW 1: CAPSULE OPENING SCREEN */}
         {currentView === 'capsule' && (
           <CapsuleOpeningScreen
             senderName={senderName}
@@ -123,7 +122,7 @@ export default function App() {
           />
         )}
 
-        {/* VIEW 2: REVEALED CELEBRATION (UNWRAPPED GREETING) */}
+        {/* VIEW 2: REVEALED CELEBRATION */}
         {currentView === 'revealed' && (
           <RevealedCelebration
             senderName={senderName}
@@ -144,15 +143,25 @@ export default function App() {
 
       </main>
 
-      {/* Footer */}
+      {/* Footer with Pratik Zajam Personal Branding */}
       <footer className="app-footer">
         <div className="footer-content">
+          <div className="footer-brand-badge">
+            <span className="pz-brand-monogram sm">PZ</span>
+            <span className="footer-brand-name">Pratik Zajam</span>
+          </div>
           <p className="footer-greeting">
             Wishing you and your family a luminous, healthy, and prosperous Diwali! 🪔
           </p>
-          <p className="footer-credit">
-            Diwali Deepotsav • A Surprise from <strong>{senderName || DEFAULT_SENDER}</strong>
-          </p>
+          <div className="footer-links">
+            <a href="https://github.com/pratikzajam" target="_blank" rel="noopener noreferrer">
+              GitHub @pratikzajam
+            </a>
+            <span className="dot-sep">•</span>
+            <a href="mailto:zajampratik@gmail.com">
+              zajampratik@gmail.com
+            </a>
+          </div>
         </div>
       </footer>
 

@@ -64,13 +64,18 @@ export default function RevealedCelebration({
                 <p className="blessing-paragraph">{blessingP2}</p>
               </div>
 
-              {/* Dynamic Sign-off with Sender Name */}
+              {/* Signature & Brand Seal */}
               <div className="signoff-area">
-                <p className="warm-wishes-text">With warm wishes,</p>
-                <p className="dynamic-sender-signoff">
-                  <span className="signoff-name">{displaySender}</span>
-                  <span className="signoff-diya">🪔</span>
-                </p>
+                <p className="warm-wishes-text">With warm wishes & festive regards,</p>
+                <div className="signature-flex-row">
+                  <p className="dynamic-sender-signoff">
+                    <span className="signoff-name">{displaySender}</span>
+                    <span className="signoff-diya">🪔</span>
+                  </p>
+                  <div className="verified-creator-seal">
+                    <span>✦ VERIFIED GREETING ✦</span>
+                  </div>
+                </div>
               </div>
 
               {/* Center Diya */}
@@ -91,11 +96,22 @@ export default function RevealedCelebration({
           soundEnabled={soundEnabled}
         />
 
-        {/* Recipient Response Action */}
-        <div className="revealed-single-action-card">
-          <div className="reply-card glass-panel text-center">
-            <h4>💬 Send Festive Thanks to {displaySender}</h4>
-            <p>Send a warm thank you note back to {displaySender} on WhatsApp!</p>
+        {/* Pratik Zajam Creator & Branding Profile Showcase Card */}
+        <div className="creator-branding-card glass-panel">
+          <div className="creator-profile-header">
+            <div className="creator-avatar-wrap">
+              <div className="creator-avatar-glow"></div>
+              <div className="creator-avatar-monogram">PZ</div>
+            </div>
+            <div className="creator-profile-info">
+              <h3 className="creator-profile-name">{displaySender}</h3>
+              <p className="creator-profile-tagline">
+                Wishing you a luminous Diwali filled with warmth, prosperity, and success!
+              </p>
+            </div>
+          </div>
+
+          <div className="creator-actions-row">
             <a
               href={thankUrl}
               target="_blank"
@@ -103,7 +119,25 @@ export default function RevealedCelebration({
               className="btn btn-whatsapp"
             >
               <span className="btn-icon">💬</span>
-              <span>Say "Thank you {displaySender.split(' ')[0]}!" on WhatsApp</span>
+              <span>Say "Happy Diwali {displaySender.split(' ')[0]}!" on WhatsApp</span>
+            </a>
+
+            <a
+              href="https://github.com/pratikzajam"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-outline-gold"
+            >
+              <span className="btn-icon">🐙</span>
+              <span>GitHub @pratikzajam</span>
+            </a>
+
+            <a
+              href="mailto:zajampratik@gmail.com"
+              className="btn btn-outline-subtle"
+            >
+              <span className="btn-icon">✉️</span>
+              <span>Email Pratik</span>
             </a>
           </div>
         </div>
