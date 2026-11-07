@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import InteractiveDiyas from './InteractiveDiyas';
 
 export default function RevealedCelebration({
@@ -13,13 +13,42 @@ export default function RevealedCelebration({
   onDownloadPNG,
   soundEnabled
 }) {
+  const [emailCopied, setEmailCopied] = useState(false);
+
   const displayName = recipientName.trim() || 'Rahul';
   const displaySender = senderName.trim() || 'Pratik Zajam';
+  const senderEmail = 'zajampratik@gmail.com';
 
   const thankMessage = encodeURIComponent(
     `Thank you ${displaySender} for the wonderful Diwali surprise! 🪔✨ Wishing you and your family a very Happy and Prosperous Diwali! From ${displayName}`
   );
   const thankUrl = `https://api.whatsapp.com/send?text=${thankMessage}`;
+
+  // Smart Email Sender: Opens Gmail Web Composer + Copies Email to Clipboard
+  const handleEmailClick = (e) => {
+    e.preventDefault();
+
+    const subject = encodeURIComponent(`Happy Diwali ${displaySender}! 🪔`);
+    const body = encodeURIComponent(
+      `Hi ${displaySender},\n\nThank you for the wonderful Diwali surprise! 🪔✨ Wishing you and your family a very Happy and Prosperous Diwali!\n\nWarm regards,\n${displayName}`
+    );
+
+    // 1. Copy email address to clipboard
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(senderEmail);
+    }
+    setEmailCopied(true);
+    setTimeout(() => setEmailCopied(false), 3500);
+
+    // 2. Open Gmail Webmail in a new tab (bypasses Windows mailto: protocol issues)
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${senderEmail}&su=${subject}&body=${body}`;
+    const newWindow = window.open(gmailUrl, '_blank', 'noopener,noreferrer');
+
+    // 3. Fallback: If popup blocker blocked the tab, trigger mailto protocol
+    if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
+      window.location.href = `mailto:${senderEmail}?subject=${subject}&body=${body}`;
+    }
+  };
 
   return (
     <section className="view-section active-view">
@@ -132,13 +161,29 @@ export default function RevealedCelebration({
               <span>GitHub @pratikzajam</span>
             </a>
 
-            <a
-              href="mailto:zajampratik@gmail.com"
-              className="btn btn-outline-subtle"
+            {/* Smart Email Button */}
+            <button
+              type="button"
+              className="btn btn-outline-subtle email-trigger-btn"
+              onClick={handleEmailClick}
+              title="Click to send an email via Gmail or copy email address"
             >
               <span className="btn-icon">✉️</span>
               <span>Email Pratik</span>
-            </a>
+            </button>
+          </div>
+
+          {/* Email Feedback Toast & Direct Address Display */}
+          <div className="email-status-feedback">
+            {emailCopied ? (
+              <span className="email-copied-toast">
+                ✓ Opened Gmail & copied <strong>{senderEmail}</strong> to clipboard!
+              </span>
+            ) : (
+              <span className="email-direct-hint">
+                Direct: <a href={`mailto:${senderEmail}`} onClick={handleEmailClick}>{senderEmail}</a>
+              </span>
+            )}
           </div>
         </div>
 

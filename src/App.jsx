@@ -158,7 +158,12 @@ export default function App() {
               GitHub @pratikzajam
             </a>
             <span className="dot-sep">•</span>
-            <a href="mailto:zajampratik@gmail.com">
+            <a
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=zajampratik@gmail.com&su=Happy%20Diwali%20Pratik!%20%F0%9F%AA%94"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Open Gmail to email Pratik"
+            >
               zajampratik@gmail.com
             </a>
           </div>
